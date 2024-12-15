@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <PathGeometry x:Key="Chess">
+        M 0 0 L 800 0 M 0 100 L 800 100 M 0 200 L 800 200 M 0 300 L 800 300 M 0 400 L 800 400
+        M 0 500 L 800 500 M 0 600 L 800 600 M 0 700 L 800 700 M 0 800 L 800 800 M 0 900 L 800 900
+        M 0 0 L 0 400 M 100 0 L 100 400 M 200 0 L 200 400 M 300 0 L 300 400 M 400 0 L 400 400 M 500 0 L 500 400 M 600 0 L 600 400 M 700 0 L 700 400 M 800 0 L 800 400
+        M 0 500 L 0 900 M 100 500 L 100 900 M 200 500 L 200 900 M 300 500 L 300 900 M 400 500 L 400 900 M 500 500 L 500 900 M 600 500 L 600 900 M 700 500 L 700 900 M 800 500 L 800 900
+        M 300 0 L 500 200 M 300 200 L 500 0
+        M 300 700 L 500 900 M 300 900 L 500 700
+    </PathGeometry>
+</ResourceDictionary>

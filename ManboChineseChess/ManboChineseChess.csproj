@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Executable\ELEEYE.EXE" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Executable\ELEEYE.EXE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="EleCho.WpfSuite" Version="0.9.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibChineseChess.Robots.UcciRobot\LibChineseChess.Robots.UcciRobot.csproj" />
+    <ProjectReference Include="..\LibChineseChess\LibChineseChess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AsmResources\AudioClips.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AudioClips.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="AsmResources\AudioClips.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AudioClips.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
