@@ -8,7 +8,7 @@
         xmlns:ws="https://schemas.elecho.dev/wpfsuite"
         xmlns:vc="clr-namespace:ManboChineseChess.ValueConverters"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="500"
+        Title="曼波象棋" Height="450" Width="500"
         d:DataContext="{d:DesignInstance Type=local:MainWindow}">
 
     <Window.Resources>
@@ -133,9 +133,11 @@
                                                        DisabledBackground="White"
                                                        Foreground="Red"
                                                        DisabledForeground="Red"
+                                                       FontFamily="KaiTi"
                                                        Padding="0"
                                                        CornerRadius="45"
-                                                       FontSize="48"
+                                                       FontSize="52"
+                                                       IsEnabled="{Binding IsEnabled}"
                                                        Content="{Binding Converter={x:Static vc:PawnOnWpfToDisplayTextConverter.Instance}}">
                                                 <ws:Button.Effect>
                                                     <DropShadowEffect ShadowDepth="1"/>
@@ -171,8 +173,14 @@
         </Viewbox>
         <Grid Grid.Column="1"
               Margin="10 0 0 0">
-            <TextBlock Text="曼波思考中..."
-                       Visibility="{Binding ComputerThinking,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <StackPanel>
+                <TextBlock Text="曼波思考中..."
+                           Visibility="{Binding ComputerThinking,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <TextBlock Text="你赢了!"
+                           Visibility="{Binding PlayerWin,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <TextBlock Text="你输了!"
+                           Visibility="{Binding PlayerLoss,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </StackPanel>
 
             <ws:StackPanel
                 VerticalAlignment="Bottom"

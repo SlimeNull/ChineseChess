@@ -36,6 +36,12 @@ namespace ManboChineseChess
         private PawnOnWpf? _selectedPawn;
 
         [ObservableProperty]
+        private bool _playerWin;
+
+        [ObservableProperty]
+        private bool _playerLoss;
+
+        [ObservableProperty]
         private bool _computerThinking;
 
         public MainWindow()
@@ -71,6 +77,9 @@ namespace ManboChineseChess
 
             Game = new Game();
             Robot = new UcciRobot(Game, 3, "Executable/ELEEYE.exe");
+
+            PlayerWin = false;
+            PlayerLoss = false;
 
             InitializeFromBoard(Game.CurrentBoard);
             UpdateLocationsStatus();
@@ -217,6 +226,33 @@ namespace ManboChineseChess
             ComputerThinking = false;
         }
 
+        public bool CheckWinLose()
+        {
+            var selfHasGeneral = Game.CurrentBoard.EnumerateSelfPawns().Any(pawn => pawn.Pawn.Kind == PawnKind.General);
+            var opponentHasGeneral = Game.CurrentBoard.EnumerateOpponentPawns().Any(pawn => pawn.Pawn.Kind == PawnKind.General);
+
+            var win = !opponentHasGeneral;
+            var lose = !selfHasGeneral;
+
+            PlayerWin = win;
+            PlayerLoss = lose;
+
+            if (win || lose)
+            {
+                foreach (var pawn in Pawns)
+                {
+                    pawn.IsEnabled = false;
+                }
+
+                foreach (var loc in Locations)
+                {
+                    loc.IsEnabled = false;
+                }
+            }
+
+            return win || lose;
+        }
+
         [RelayCommand]
         public async Task SelectPawn(PawnOnWpf pawnOnWpf)
         {
@@ -241,7 +277,14 @@ namespace ManboChineseChess
                     await MovePawn(SelectedPawn, pawnOnWpf, location.X, location.Y);
                     SelectedPawn = null;
 
+                    if (CheckWinLose())
+                    {
+                        return;
+                    }
+
                     await BotMove();
+
+                    CheckWinLose();
                 }
             }
             else
@@ -272,7 +315,14 @@ namespace ManboChineseChess
                 await MovePawn(SelectedPawn, pawnOnWpf, targetX, targetY);
                 SelectedPawn = null;
 
+                if (CheckWinLose())
+                {
+                    return;
+                }
+
                 await BotMove();
+
+                CheckWinLose();
             }
         }
 
