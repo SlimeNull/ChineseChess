@@ -270,6 +270,16 @@ namespace ManboChineseChess
                 {
                     SelectedPawn.IsSelected = false;
                     SelectedPawn = null;
+
+                    UpdateLocationsStatus();
+                }
+                else if (targetPawn.Camp == Camp.Self)
+                {
+                    SelectedPawn.IsSelected = false;
+                    SelectedPawn = pawnOnWpf;
+                    SelectedPawn.IsSelected = true;
+
+                    UpdateLocationsStatus();
                 }
                 else if (targetPawn.Camp == Camp.Opponent && CanMovePawn(SelectedPawn, location.X, location.Y))
                 {
